@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Restaurant Site</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>	
+
+
+<!-- Font Awesome Script -->
+<script src="https://kit.fontawesome.com/a74c2d8de3.js" crossorigin="anonymous"></script>
+
+<style>
+
+	.mobile-menu {
+		display: none;
+		z-index: 3;
+	}
+
+	.fa-times {
+		display: none;
+		z-index: 3;
+	}
+
+	.container {
+		max-width: 1280px;
+	}
+
+	.mobile-options {
+		display: none;
+	}
+
+	.menu-items {
+		text-align: center;
+		display: inline-block;
+	}
+
+	.menu-items ul {
+		display: inline-block;
+		color: black;
+		font-weight: bold;
+	}
+
+	.menu-items li {
+		text-decoration: none;
+		display: inline-block;
+		margin: 0 20px 0 20px;
+		vertical-align: sub;
+		cursor: pointer;
+	}
+
+	.menu-items a {
+		color: black;
+	}
+
+	.menu-buttons {
+		display: inline-block;
+		float: right;
+	}
+
+	.menu-buttons li {
+		display: inline-block;
+		margin: 0 5px 0 5px;
+	}
+
+	.menu-buttons button {
+		background-color: red;
+	    color: white;
+	    text-align: center;
+	    border-radius: 10px;
+	    border: none;
+	    font-size: 16px;
+	    padding: 5px;
+	    width: 110px;
+	    vertical-align: bottom;
+	}
+	
+	nav {
+		padding: 20px;
+	}
+
+	.hero {
+		background-image: url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+		background-size: cover;
+    	height: 600px;
+	}
+
+	.hero h1 {
+		text-transform: uppercase;
+		text-align: center;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    font-size: 40px;
+	    color: black;
+	    font-weight: 600;	
+	    box-shadow: 4px 13px 20px 21px rgba(0,0,0,0.47);
+	    background-color: bisque;
+	    padding: 20px;
+
+	}
+
+	.owner-statement {
+		margin-top: 50px;
+	}
+
+	.owner-statement h2 {
+		text-decoration: underline;
+		margin-bottom: 25px;
+	}
+
+	.owner-statement .owner-photo {
+		height: 300px;
+		width: 300px;
+		background-image: url("https://images.unsplash.com/photo-1564632302631-c3670e71f579?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80");
+		background-size: cover;
+	}
+
+
+	.specialty-dishes h4 {
+		margin-top: 25px;
+	}
+
+	.specialty h3 {
+		text-align: center;
+		font-style: italic;
+	}
+
+	.dish-images img {
+		height: 250px;
+		width: 250px;
+		border-radius: 126px;
+	    flex: 1;
+	}
+
+	.dish-images h4 {
+		text-align: center;
+		font-style: italic;
+	}
+
+	.menu {
+		background-color: #9e1410;
+		height: 200px;
+		position: relative;
+	}
+
+	.menu div {
+		text-align: center;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    color: white;
+	}
+
+	.food-items {
+		background-color: black;
+	}
+
+	.food {
+		text-align: center;
+		color: white;
+	}
+
+	.food div {
+		display: inline-block;
+	}
+
+	.food-images {
+		height: 200px;
+		width: 200px;
+	}
+
+	.food img {
+		height: 100%;
+		width: 100%;
+		opacity: .24;
+		cursor: pointer;
+	}
+
+	.food img:hover {
+		opacity: 1;
+	}
+
+	.order-button {
+		text-align: center;
+	}
+
+	.food-items button {
+		background-color: red;
+		color: white;
+		text-align: center;
+		border-radius: 10px;
+		border: none;
+		font-size: 20px;
+		padding: 10px;
+		width: 200px;
+		margin: 25px;	
+	}
+
+	.location h2 {
+		text-align: center;
+		margin: 40px;
+	}
+
+	.location li {
+		list-style-type: none;
+		font-size: 15px;
+		text-align: center;
+		vertical-align: top;
+	}
+
+	.location li h2 {
+		text-align: center;
+		text-decoration: underline;
+		font-style: italic;
+		margin-top: 0;	
+	}
+
+	.footer {
+		margin: 30px;	}
+
+	.footer div {
+		display: inline-block;
+	}
+
+	.made-by {
+		float: right;
+		font-weight: bolder;
+		font-size: 16px;
+	}
+
+
+	@media only screen and (max-width: 768px) {
+	  /* For mobile phones: */
+	  nav {
+	  	padding: 0;
+	  }
+	  .mobile-options {
+	  	display: block;
+	  	margin-left: 15px;	  
+	  	position: fixed;
+	  	background-color: white;
+    	padding: 20px;	
+    	z-index: 2;  
+	  }
+
+	  .mobile-menu-icon-close {
+	  	display: none;
+	  }
+
+	  .mobile-menu {
+	  	animation-duration: 3s;
+  		animation-name: slidein;
+	  	display: none;
+		position: fixed;
+	    top: 69px;
+	    background-color: black;
+	    color: white;
+	    width: 100%;
+	    text-align: center;
+	    z-index: 2;
+	  }
+
+	  .mobile-menu ul {
+	  	padding: 0;
+	  }
+
+	  .mobile-menu li {
+	  	list-style-type: none;
+	  	font-size: 18px;
+	  	padding: 20px;
+	  }
+
+	  .mobile-menu li a {
+	  	color: white;
+	  }
+
+	  .mobile-menu button {
+	  	background-color: red;
+	    color: white;
+	    text-align: center;
+	    border-radius: 10px;
+	    border: none;
+	    font-size: 20px;
+	    padding: 10px;
+	    width: 200px;
+	    margin: 25px;
+	  }
+
+
+	  .menu-items {
+	  	display: none!important;
+	  }
+
+	  .menu-buttons {
+	  	display: none;
+	  }
+
+	  .mobile-menu-items {
+	  	/*display: none;*/
+	  }
+
+	  .mobile-menu-items {
+	  	width: 100%;
+	  }
+
+	  .mobile-menu-items li {
+	  	list-style-type: none;
+	  }
+
+	  .mobile-menu-order-button, .mobile-menu-icon {
+	  	display: inline-block;
+	  }
+
+	  .mobile-menu-icon {
+	  	float: left;
+	  }
+
+	  .mobile-menu-order-button {
+	  	float: right;
+	  }
+
+	  .mobile-menu-order-button button {
+		background-color: red;
+	    color: white;
+	    text-align: center;
+	    border-radius: 10px;
+	    border: none;
+	    font-size: 10px;
+	    padding: 5px;
+	    width: 100px;
+	    vertical-align: bottom;.
+	    float: right;
+	  }
+
+	  .mobile-menu-items {
+	  	background-color: black;
+	  	color: white;
+	  }
+
+	  .owner-statement .owner-photo {
+	  	width: auto;
+	  	height: 500px;
+	  }
+
+	  .specialty-dishes {
+	  	display: block;
+	  }
+
+	  .dish-images {
+	  	text-align: center;
+	  }
+
+	  .food-images {
+	  	width: 85%;	  
+	  	margin-bottom: 15px;	  }
+
+	  .food img {
+	  	opacity: 1;
+	  }
+
+	  .location ul {
+	  	padding: 0;
+	  	margin-top: 20px;	  }
+
+	  
+  	}
+
+
+
+
+
+</style>	
+
+
+
+
+</head>
+<body>
+	<div class="mobile-options">
+		<div class="mobile-menu-icon">
+			<i class="fas fa-bars fa-2x" aria-hidden="true"></i>
+			<i class="fas fa-times fa-2x"></i>
+		</div>
+	</div>
+	<div class="mobile-menu">
+		<ul>
+			<li><a href="#menu">Menu</a></li>
+			<li><a href="#specials">Specials</a></li>
+			<li><a href="#contact">Contact Us</a></li>
+			<li><i class="fab fa-facebook-square fa-2x"></i></li>
+			<li><button>Order Online</button></li>
+		</ul>
+	</div>	
+	<nav>		
+		<div class="container">
+			<div class="col-md-12 col-xs-hidden">
+				<div class="menu-items">
+					<ul>
+						<li>Home</li>
+						<li><a href="#menu">Menu</a></li>
+						<li><a href="#specials">Specials</a></li>
+						<li><a href="#contact">Contact Us</a></li>
+					</ul>
+				</div>
+				<div class="menu-buttons">
+					<ul>
+						<li><i class="fab fa-facebook-square fa-2x"></i></li>
+						<li><button>Order Online</button></li>
+					</ul>
+				</div>
+			</div>
+<!-- 			<div class="col-md-hidden col-xs-12 mobile-menu">
+				<div class="mobile-menu-items">
+					<ul>
+						<li>Menu</li>
+						<li>Specials</li>
+						<li>Contact Us</li>
+						<li>Facebook</li>
+						<li>Order Online</li>
+					</ul>
+				</div>
+			</div> -->	
+		</div>
+	</nav>
+	<div class="hero">
+		<div>
+			<div>
+				<h1>Restaurant Name</h1>
+			</div>
+		</div>
+	</div>
+	<section class="owner-statement">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="col-md-9">
+					<h2>Your Favorite Restaurant</h2>
+					<p>Lorem, ipsum dolor sit, amet consectetur adipisicing elit. Voluptas ex quas ducimus quibusdam ut fuga deserunt natus placeat voluptate eius nobis nulla voluptatem obcaecati, deleniti, possimus quasi iure assumenda tempore.</p>
+					<p>Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Ab, repellendus ut sequi iusto quasi culpa error asperiores nostrum nam eius pariatur dicta assumenda, repudiandae debitis officiis numquam delectus voluptatem nobis.</p>
+					<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus necessitatibus similique maxime? Cumque ex esse repellendus possimus? Dolor, reiciendis deserunt ipsum saepe autem, adipisci ea expedita perspiciatis. Consequuntur, suscipit, quia!</p>
+					<p>"Lorem ipsum dolor sit amet consectetur adipisicing elit."</p>
+				</div>
+				<div class="col-md-1">
+					<div class="owner-photo">
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div style="border-bottom: 4px solid red; width: 95%; margin: 20px 20px;"></div>
+	</section>
+
+	<section class="specialty">
+		<a id="specials" href="#">
+		<div class="container">
+			<h3>Specialty Dishes</h3>
+			<div class="specialty-dishes col-md-12">
+				<div class="dish-images col-md-3">
+					<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+					<h4>Specialty Dish</h4>
+					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia non natus, itaque hic temporibus quis unde soluta repellendus quo reprehenderit dolore? Reprehenderit libero nam facere laboriosam illo voluptatum vero optio.</p>
+				</div>
+				<div class="dish-images col-md-3">
+					<img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" alt="">
+					<h4>Specialty Dish</h4>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing, elit. Libero deleniti placeat fugit asperiores debitis, doloribus dignissimos id dolor, nesciunt quas, perspiciatis! Obcaecati iure tempora dolorem laudantium, neque, odio aperiam! Blanditiis?</p>
+				</div>
+				<div class="dish-images col-md-3">
+					<img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+					<h4>Specialty Dish</h4>
+					<p>Lorem ipsum dolor, sit amet consectetur, adipisicing elit. Amet obcaecati quas eligendi, animi quidem, repudiandae earum ipsam ullam voluptas sequi quibusdam, iure unde dolore qui iste voluptate, doloribus non quisquam.</p>
+				</div>
+				<div class="dish-images col-md-3">
+					<img src="https://images.unsplash.com/photo-1523905330026-b8bd1f5f320e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1358&q=80" alt="">
+					<h4>Specialty Dish</h4>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit natus nobis libero id eum placeat? Incidunt at ex placeat, ab ipsam aperiam nesciunt recusandae! Officia, in odit officiis hic iure.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="menu">
+		<div>
+			<h2>Our Menu</h2>
+			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit</p>
+		</div>
+	</section>
+	<section class="food-items">
+		<a id="menu" href="#">
+		<div class="food">
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1548811256-1627d99e7a2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1562403492-454d4b075cac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1559667709-eabb5b50117a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1550367363-ea12860cc124?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1588166524938-1ee110d7dcef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1589047133481-02b4a5327d89?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1570604127008-f644337cfb8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1572141619956-3af324e62ddc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1454334281609-87a89762912c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1598148524201-ae00d9f71f8a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1600470944938-b301e41001c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+			<div class="food-images"><img src="https://images.unsplash.com/photo-1592577477548-399a92749673?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt=""></div>
+		</div>
+		<div class="order-button"><button>Order Online</button></div>
+	</section>
+
+	<section class="location">
+		<div class="container">
+			<h2>Lorem ipsum dolor sit amet consectetur</h2>
+			<div class="map col-md-12">
+				<div class="col-md-6">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d43606.64122334141!2d139.82187067719445!3d35.67495822815201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7f4f3fc2b347e1b1!2sTempura%20Fukamachi!5e0!3m2!1sen!2sus!4v1602884283637!5m2!1sen!2sus" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+				</div>
+				<div class="col-md-6">
+					<a id="contact" href="#">
+					<ul>
+						<li><h2>Restaurant</h2></li>
+						<li>Restaurant Name</li>
+						<li>1234 Street Name</li>
+						<li>City Name, ST</li>
+						<li><a href="#">555-555-5555</a></li>
+					</ul>
+					<ul>
+						<li><h2>Restaurant Name</h2></li>
+						<li>Restaurant Name</li>
+						<li>3570 Street Name</li>
+						<li>City Name, ST</li>
+						<li><a href="#">500-575-5544</a></li>
+					</ul>					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<div class="footer">
+				<div class="copyright">
+					<p>&#169; 2020</p>
+				</div>
+				<div class="made-by">
+					<p>Made by William Bird</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+
+<script>
+	
+	$(document).ready(function(){
+
+
+		$('.fa-bars').click(function() {
+			$('.mobile-menu').show();
+			$('.fa-bars').hide();
+			$('.fa-times').show();
+		})
+
+		$('.mobile-menu').click(function() {
+			$('.mobile-menu').hide();
+		})
+
+		$('.fa-times').click(function(){
+			$('.mobile-menu').hide();
+			$('.fa-bars').show();
+			$('.fa-times').hide();
+		})
+
+		$('.mobile-menu a').click(function() {
+			$('.mobile-menu').hide();
+			$('.fa-bars').show();
+			$('.fa-times').hide();
+		})
+
+
+
+		
+	})
+
+
+
+
+</script>
+
+
+
+
+
+</html>
